@@ -16,6 +16,7 @@
     É necessério os seguintes requisitos para a execução do programa:
 
 3.1. Instalação do Python:
+
     - Linux:
         sudo apt update
         sudo apt install python3
@@ -24,12 +25,15 @@
         Marque a opção "Add Python to PATH"
 
 3.2. Certifique-se que o pip esteja instalado:
+
     pip --version
 
 3.3. Instale o Pygame:
+
     pip install pygame
     
 3.4. Requisitos de Sistema:
+
     - Sistema Operacional: Linux ou Windows
     - Memória RAM: 2 GB ou mais
     - Processador: Dual-core ou superior
@@ -38,9 +42,11 @@
 4. Instruções de Uso:
 
 4.1. Abra o terminal no diretório do programa e execute:
+
     python main.py
 
 4.2. Comandos:
+
     - Botão esquerdo do mouse: cria um vértice (Dentro da tela de desenho, abaixo do menu)
     - Botão direito do mmouse: Fecha o polígono (se houver ao menos 3 vértices)
     - Botão do meio do mouse: Seleciona um polígono (Clique dentro do polígono para selecionar e fora do polígono para deselecionar)
