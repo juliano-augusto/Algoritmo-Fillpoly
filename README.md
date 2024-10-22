@@ -16,13 +16,15 @@
     É necessério os seguintes requisitos para a execução do programa:
 
 3.1. Instalação do Python:
+   - Linux:
 
-    - Linux:
-        sudo apt update
-        sudo apt install python3
-    - Windows: 
-        Baixe o instalador no site oficial https://www.python.org/downloads/
-        Marque a opção "Add Python to PATH"
+         sudo apt update
+         sudo apt install python3
+       
+   - Windows:
+     
+        - Baixe o instalador no site oficial https://www.python.org/downloads/
+        - Marque a opção "Add Python to PATH"
 
 3.2. Certifique-se que o pip esteja instalado:
 
@@ -34,10 +36,10 @@
     
 3.4. Requisitos de Sistema:
 
-    - Sistema Operacional: Linux ou Windows
-    - Memória RAM: 2 GB ou mais
-    - Processador: Dual-core ou superior
-    - Espaço em disco: 200 MB livres
+   - Sistema Operacional: Linux ou Windows
+   - Memória RAM: 2 GB ou mais
+   - Processador: Dual-core ou superior
+   - Espaço em disco: 200 MB livres
 
 4. Instruções de Uso:
 
@@ -47,9 +49,10 @@
 
 4.2. Comandos:
 
-    - Botão esquerdo do mouse: cria um vértice (Dentro da tela de desenho, abaixo do menu)
-    - Botão direito do mmouse: Fecha o polígono (se houver ao menos 3 vértices)
-    - Botão do meio do mouse: Seleciona um polígono (Clique dentro do polígono para selecionar e fora do polígono para deselecionar)
-    - Teclas Delete / Backspace: Exclui um polígono selecionado
-    - Menu: Clique em cima dos botões de cores para alterar a cor (RGB);
-            Clique no botão 'Pintar Arestas' para ativa (verde) / desativar (vermelho) a pintura de arestas.
+   - Botão esquerdo do mouse: cria um vértice (Dentro da tela de desenho, abaixo do menu)
+   - Botão direito do mmouse: Fecha o polígono (se houver ao menos 3 vértices)
+   - Botão do meio do mouse: Seleciona um polígono (Clique dentro do polígono para selecionar e fora do polígono para deselecionar)
+   - Teclas Delete / Backspace: Exclui um polígono selecionado
+   - Menu:
+     - Clique em cima dos botões de cores para alterar a cor (RGB);
+     - Clique no botão 'Pintar Arestas' para ativar (verde) / desativar (vermelho) a pintura de arestas.
