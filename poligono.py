@@ -31,70 +31,45 @@ class Poligono:
 
         # Limpa as scanlines anteriores
         self.scanlines = []
+        
+        ymin_global = int(min(p[1] for p in self.vertices))
+        ymax_global = int(max(p[1] for p in self.vertices))
 
-        # Encontra o Y mínimo e o Y máximo
-        ymin_global = min(int(p[1]) for p in self.vertices)
-        ymax_global = max(int(p[1]) for p in self.vertices)
-
-        #print(f"Preenchendo polígono: Y_min={y_min}, Y_max={y_max}")
-
-        # Constrói a Tabela de Arestas
-        tabela_arestas = [[] for _ in range(ymax_global - ymin_global + 1)]
+        # Inicializar a lista de arestas que serão processadas
         n = len(self.vertices)
+        aresta_proc = {y: [] for y in range(ymin_global, ymax_global + 1)}
+        # Processar cada par de vértices e adicionar as arestas à lista de processamento direto
         for i in range(n):
             p1 = self.vertices[i]
-            p2 = self.vertices[(i + 1) % n] # Garante que o último vértice seja conectado de volta ao primeiro
-
+            p2 = self.vertices[(i + 1) % len(self.vertices)]
+    
+            # Ignorar arestas horizontais
             if p1[1] == p2[1]:
-                continue  # Ignorar arestas horizontais
-            # Determina que o ponto inicial da aresta (ymin) seja sempre o ponto com o menor valor de y
+                continue
+
+            # Definir ymin, ymax, x inicial e Tx
             if p1[1] < p2[1]:
-                ymin = int(p1[1])
-                ymax = int(p2[1])
+                ymin, ymax = int(p1[1]), int(p2[1])
                 x = p1[0]
                 Tx = (p2[0] - p1[0]) / (p2[1] - p1[1])
             else:
-                ymin = int(p2[1])
-                ymax = int(p1[1])
+                ymin, ymax = int(p2[1]), int(p1[1])
                 x = p2[0]
                 Tx = (p1[0] - p2[0]) / (p1[1] - p2[1])
 
-            tabela_arestas[ymin - ymin_global].append({'ymax': ymax, 'x': x, 'Tx': Tx})
-
-        # Inicializar a tabela das arestas que intersectam cada scanline
-        aresta_proc = []
-
-        # Processa cada scanline de ymin_global até ymax_global
-        for y in range(ymin_global, ymax_global + 1):
+            for y in range(ymin, ymax):
+                aresta_proc[y].append(x)
+                x += Tx
             
-            aux = []
-            
-            # Adiciona todas as arestas da tabela_arestas que começam na scanline atual
-            if y - ymin_global < len(tabela_arestas):
-                for aresta in tabela_arestas[y - ymin_global]:
-                    aresta_proc.append(aresta)
-               
-            # Remove arestas da aresta_proc onde y >= ymax
-            for aresta in aresta_proc:
-                if aresta['ymax'] > y:
-                    aux.append(aresta)
-            aresta_proc = aux
-
-            # Ordenar a aresta_proc em ordem crescente pela coordenada x
-            aresta_proc.sort(key=lambda aresta: aresta['x'])
-
-            # Adiciona pares de intersecções de cada scanline que será pintada à lista scanline
-            for i in range(0, len(aresta_proc), 2):
-                if i + 1 >= len(aresta_proc):
-                    break
-                x_ini = int(round(aresta_proc[i]['x']))
-                x_fim = int(round(aresta_proc[i + 1]['x']))
-                self.scanlines.append((y, x_ini, x_fim)) # Armazena o intervalo que será pintado
-
-            # Atualizar x para as arestas na aresta_proc usando o inverso da inclinação
-            for aresta in aresta_proc:
-                aresta['x'] += aresta['Tx']
-
+        for y, intersecoes in aresta_proc.items():
+            intersecoes.sort()  # Organizar interseções em ordem crescente de x
+        
+            # Processar em pares e adicionar à lista de scanlines
+            for j in range(0, len(intersecoes) - 1, 2):
+                x_ini = int(round(intersecoes[j]))
+                x_fim = int(round(intersecoes[j + 1]))
+                self.scanlines.append((y, x_ini, x_fim))
+                
         self.preenchido = True
 
     # A função determina se um ponto está dentro de um polígono
